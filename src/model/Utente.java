@@ -120,4 +120,13 @@ public class Utente implements Serializable {
 	public boolean isCorrectPassword(String p) {
 		return p.equals(this.passwordUser);
 	}
+
+	@Override
+	public String toString() {
+		return "Utente [birthdateUser=" + birthdateUser + ", emailUser=" + emailUser + ", idUser=" + idUser
+				+ ", nameUser=" + nameUser + ", passwordUser=" + passwordUser + ", surnameUser=" + surnameUser
+				+ ", noleggios=" + noleggios + "]";
+	}
+	
+	
 }

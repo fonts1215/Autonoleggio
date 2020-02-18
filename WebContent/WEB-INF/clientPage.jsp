@@ -16,11 +16,24 @@
 
 </head>
 <body>
-	<h1>CLIENT PAGE</h1>
+	<div class="container">
+		<div class="row">
+			<div class="col-9">
+				<h1>CLIENT PAGE</h1>
+			</div>
+			<div class="col-3">
+				<form action="Logout" method="post">
+					<input type="submit" value="logout">
+				</form>
+			</div>
+		</div>
+	</div>
+
 	<%
-		Utente user = (Utente) request.getAttribute("username");
-		List<Categoria> categorie = (List<Categoria>) request.getAttribute("categoria");
-		String codice = (String) request.getAttribute("risultato");
+		HttpSession sessione = request.getSession();
+		Utente user = (Utente) sessione.getAttribute("utente");
+		List<Categoria> categorie = (List<Categoria>) sessione.getAttribute("categoria");
+		String codice = (String) sessione.getAttribute("risultato");
 	%>
 	<p>
 		Benvenuto

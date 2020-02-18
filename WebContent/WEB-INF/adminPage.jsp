@@ -73,9 +73,10 @@
 
 <body class="animsition">
 	<%
-		List<Utente> utenti = (List<Utente>) request.getAttribute("dbUtenti");
-		List<Veicolo> veicoli = (List<Veicolo>) request.getAttribute("dbVeicoli");
-		List<Categoria> categorie = (List<Categoria>) request.getAttribute("dbCategoria");
+		HttpSession sessione = request.getSession();
+		List<Utente> utenti = (List<Utente>) sessione.getAttribute("dbUtenti");
+		List<Veicolo> veicoli = (List<Veicolo>) sessione.getAttribute("dbVeicoli");
+		List<Categoria> categorie = (List<Categoria>) sessione.getAttribute("dbCategoria");
 	%>
 	<div class="page-wrapper">
 		<!-- HEADER MOBILE-->
@@ -316,9 +317,10 @@
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
-												<a href="/Autonoleggio/login.jsp"> <i
-													class="zmdi zmdi-power"></i>Logout
-												</a>
+												<a  id="logout"> <i class="zmdi zmdi-power"></i>Logout</a>
+												<form action="Logout" method="post">
+													<button id="logoutbutton" type="submit" style="display: none" ></button>
+												</form>
 											</div>
 										</div>
 									</div>
@@ -375,7 +377,7 @@
 												<i class="zmdi zmdi-shopping-cart"></i>
 											</div>
 											<div class="text">
-												<h2><%= veicoli.size() %></h2>
+												<h2><%=veicoli.size()%></h2>
 												<span>veicoli</span>
 											</div>
 										</div>
@@ -464,24 +466,24 @@
 										<div class="table-responsive">
 											<table class="table table-top-countries">
 												<form action="Categoria" method="post">
-												<tbody>
-													<%
-														for (Categoria c : categorie) {
-													%>
+													<tbody>
+														<%
+															for (Categoria c : categorie) {
+														%>
 
-													<tr>
-														<button
-															id="button_nome_categoria<%=c.getNomeCategoria()%>"
-															type="submit" style="display: none" name="categoria"
-															value="<%=c.getNomeCategoria()%>"></button>
+														<tr>
+															<button
+																id="button_nome_categoria<%=c.getNomeCategoria()%>"
+																type="submit" style="display: none" name="categoria"
+																value="<%=c.getNomeCategoria()%>"></button>
 
-														<td class="nome_categoria"><%=c.getNomeCategoria()%></td>
-													</tr>
-													<%
-														}
-													%>
+															<td class="nome_categoria"><%=c.getNomeCategoria()%></td>
+														</tr>
+														<%
+															}
+														%>
 
-												</tbody>
+													</tbody>
 												</form>
 											</table>
 
@@ -552,7 +554,16 @@
 			console.log(asd);
 			$("#"+asd).trigger("click")
 	    })
+	    
+	    $("#logout").on("click", function (e) {
+	    	console.log("clicked")
+			$("#logoutbutton").trigger("click")
+	    })
+	    
+	    
 	})
+	
+	
 	
 	function post(params){
     	$.ajax({
