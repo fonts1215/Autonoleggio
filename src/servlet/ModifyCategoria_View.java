@@ -25,5 +25,4 @@ public class ModifyCategoria_View extends HttpServlet {
 		request.setAttribute("categoria", categoria);
 		request.getRequestDispatcher("/WEB-INF/modify_category.jsp").forward(request, response); 
 	}
-
 }
