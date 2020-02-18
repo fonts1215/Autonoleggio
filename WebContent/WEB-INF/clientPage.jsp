@@ -1,3 +1,4 @@
+<%@page import="utils.Utils"%>
 <%@page import="java.util.List"%>
 <%@page import="model.*"%>
 <%@page import="java.util.TreeMap"%>
@@ -34,6 +35,7 @@
 		Utente user = (Utente) sessione.getAttribute("utente");
 		List<Categoria> categorie = (List<Categoria>) sessione.getAttribute("categoria");
 		String codice = (String) sessione.getAttribute("risultato");
+		List<Noleggio> noleggi = (List<Noleggio>) sessione.getAttribute("noleggi");
 	%>
 	<p>
 		Benvenuto
@@ -92,6 +94,19 @@
 					<button type="submit" class="btn btn-primary">Cerca</button>
 				</div>
 			</div>
+			
+			<h1>Le tue prenotazioni</h1>
+			
+			<% if (noleggi != null) { for(Noleggio n : noleggi) { %>
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title"><%= n.getVeicolo().getMarca() + " " + n.getVeicolo().getModello() %></h5>
+					<p class="card-text">Dal <%= Utils.dateFormatter(n.getStartRental())%> al <%=Utils.dateFormatter(n.getStopRental())%></p>
+					<p class="card-text">Prezzo <%=n.getAmountRental()%></p>
+					<a href="#" class="btn btn-danger">Delete</a>
+				</div>
+			</div>
+			<% }} %>
 		</div>
 	</form>
 	<!-- Jquery JS-->

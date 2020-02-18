@@ -42,7 +42,6 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 		Query query = JpaDAOFactory.getManager().createQuery("SELECT v FROM Veicolo v WHERE v.categoria = :para");
 		query.setParameter("para", categoria);
 		try {
-			System.out.println("query results: " + query.getResultList());
 			veicolos = query.getResultList();
 		} catch (NoResultException e) {}
 		return veicolos;		

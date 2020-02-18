@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import database.DaoFactory;
+import database.JpaDAOFactory;
 import model.Utente;
 
 /**
@@ -22,6 +23,7 @@ public class ClientPage extends HttpServlet {
 		session.setAttribute("utente", user);
 		session.setAttribute("categoria", DaoFactory.getDaoFactory().getCategoriaDAO().getCategorie());
 		session.setAttribute("codice", "");
+		session.setAttribute("noleggi", DaoFactory.getDaoFactory().getNoleggioDAO().getNoleggi(user));
 		request.getRequestDispatcher("/WEB-INF/clientPage.jsp").forward(request, response);
 	}
 }

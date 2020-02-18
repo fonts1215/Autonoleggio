@@ -16,7 +16,7 @@ import javax.servlet.http.Cookie;
 public class Logout extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("LOOOGOAGAJBUIASBGI");
+		System.out.println("LOGOUTSERVLET");
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
 		for (Cookie c : cookies) {
