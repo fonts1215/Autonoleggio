@@ -95,20 +95,25 @@
 				</div>
 			</div>
 			
-			<h1>Le tue prenotazioni</h1>
+			
+	</form>
+	
+	<h1>Le tue prenotazioni</h1>
 			
 			<% if (noleggi != null) { for(Noleggio n : noleggi) { %>
+			<form method="post" action="DeletePrenotazione">
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title"><%= n.getVeicolo().getMarca() + " " + n.getVeicolo().getModello() %></h5>
 					<p class="card-text">Dal <%= Utils.dateFormatter(n.getStartRental())%> al <%=Utils.dateFormatter(n.getStopRental())%></p>
 					<p class="card-text">Prezzo <%=n.getAmountRental()%></p>
-					<a href="#" class="btn btn-danger">Delete</a>
+					<input type="submit" value="Elimina" class="btn btn-danger">
+					<input type="hidden" name="noleggio" value="<%=n.getIdRental()%>">
 				</div>
 			</div>
+			</form>
 			<% }} %>
 		</div>
-	</form>
 	<!-- Jquery JS-->
 	<script
 		src="${pageContext.request.contextPath}/vendor/jquery-3.2.1.min.js"></script>

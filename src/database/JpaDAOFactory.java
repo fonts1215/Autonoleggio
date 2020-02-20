@@ -5,10 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import database.JPA.*;
-import database.interfaces.CategoriaDAO;
-import database.interfaces.NoleggioDAO;
-import database.interfaces.UtenteDAO;
-import database.interfaces.VeicoloDAO;
+import database.interfaces.*;
 
 public class JpaDAOFactory extends DaoFactory {
 	@Override

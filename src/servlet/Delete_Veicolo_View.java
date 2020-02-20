@@ -31,12 +31,10 @@ public class Delete_Veicolo_View extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DaoFactory.getDaoFactory().getVeicoloDAO().deleteVeicolo(request.getParameter("targa"));
-		
 		request.setAttribute("username", "admin");
 		request.setAttribute("dbUtenti", DaoFactory.getDaoFactory().getUtenteDAO().getUtenti());
 		request.setAttribute("dbVeicoli", DaoFactory.getDaoFactory().getVeicoloDAO().getAuto());
 		request.setAttribute("dbCategoria", DaoFactory.getDaoFactory().getCategoriaDAO().getCategorie());
 		request.getRequestDispatcher("WEB-INF/adminPage.jsp").forward(request, response);
 	}
-
 }
