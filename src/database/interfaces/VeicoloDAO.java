@@ -12,7 +12,7 @@ public interface VeicoloDAO {
 	public boolean addVeicolo(Veicolo veicolo);
 	public Veicolo findVeicolo(String t);
 	public void updateVeicolo(Veicolo veicolo);
-	public boolean deleteVeicolo(String targa);
+	public boolean deleteVeicolo(Veicolo veicolo);
 	public List<Veicolo> getVeicoliDisponibili(Date inzio, Date fine, Categoria categoria);
 	public List<Veicolo> getVeicoliDisponibili(Date inzio, Categoria categoria);
 }

@@ -56,6 +56,8 @@ public class Veicolo implements Serializable {
 	private int n_Posti;
 
 	private String targa;
+	
+	private byte visible;
 
 	//bi-directional many-to-one association to Noleggio
 	@OneToMany(mappedBy="veicolo")
@@ -65,6 +67,7 @@ public class Veicolo implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idcategoria")
 	private Categoria categoria;
+	
 
 	public Veicolo() {
 	}
@@ -155,6 +158,13 @@ public class Veicolo implements Serializable {
 		this.categoria = categoria;
 	}
 
+	public byte getVisible() {
+		return this.visible;
+	}
+
+	public void setVisible(byte visible) {
+		this.visible = visible;
+	}	
 
 	@Override
 	public String toString() {
@@ -162,6 +172,6 @@ public class Veicolo implements Serializable {
 				+ marca + ", modello=" + modello + ", n_Posti=" + n_Posti + ", targa=" + targa + ", noleggios="
 				+ noleggios + ", categoria=" + categoria + "]";
 	}
-
+	
 	
 }

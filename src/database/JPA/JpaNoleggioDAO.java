@@ -37,7 +37,6 @@ public class JpaNoleggioDAO implements NoleggioDAO {
 
 	@Override
 	public void inserisciNoleggio(Noleggio noleggio) {
-		System.out.println("noleggio da inserire:  " + noleggio);
 		EntityManager manager = JpaDAOFactory.getManager();
 		EntityTransaction transaction = manager.getTransaction();
 		transaction.begin();

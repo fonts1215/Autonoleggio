@@ -18,26 +18,7 @@ import model.Utente;
 @WebServlet("/AddCategoria")
 public class AddCategoria extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddCategoria() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Categoria categoria = new Categoria(request.getParameter("descrizione"), 
@@ -51,14 +32,14 @@ public class AddCategoria extends HttpServlet {
 			request.setAttribute("dbUtenti", DaoFactory.getDaoFactory().getUtenteDAO().getUtenti());
 			request.setAttribute("dbVeicoli", DaoFactory.getDaoFactory().getVeicoloDAO().getAuto());
 			request.setAttribute("dbCategoria", DaoFactory.getDaoFactory().getCategoriaDAO().getCategorie());
-			request.getRequestDispatcher("/WEB-INF/adminPage.jsp?event=success").forward(request, response);	
+			request.getRequestDispatcher("login").forward(request, response);	
 		}else {
 			Utente user = DaoFactory.getDaoFactory().getUtenteDAO().findUser("admin");
 			request.setAttribute("username", user);
 			request.setAttribute("dbUtenti", DaoFactory.getDaoFactory().getUtenteDAO().getUtenti());
 			request.setAttribute("dbVeicoli", DaoFactory.getDaoFactory().getVeicoloDAO().getAuto());
 			request.setAttribute("dbCategoria", DaoFactory.getDaoFactory().getCategoriaDAO().getCategorie());
-			request.getRequestDispatcher("/WEB-INF/adminPage.jsp?event=success").forward(request, response);	
+			request.getRequestDispatcher("login").forward(request, response);	
 		}
 	}
 

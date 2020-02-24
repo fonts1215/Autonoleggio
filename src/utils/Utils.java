@@ -57,4 +57,25 @@ public class Utils {
 		String regex = "[A-Z a-z]{2}[0-9]{3}[A-Z a-z]{2}";
 		return Pattern.matches(regex, targa);
 	}
+	
+	public static boolean validateDataNoleggio(Date dataInizio, Date dataFine) {
+		LocalDate now = LocalDate.now();
+		if(dataInizio != null && dataFine != null) {
+			LocalDate inizio = LocalDate.parse(Utils.dateFormatter(dataInizio));
+			LocalDate fine = LocalDate.parse(Utils.dateFormatter(dataFine));
+			if(now.compareTo(inizio) <= 0) {
+				if(inizio.compareTo(fine) <= 0)
+					return true;
+				else {
+					return false;
+				}
+			}else {
+				return false;
+
+			}
+		}
+		else {
+			return false;
+		}
+	}
 }

@@ -40,7 +40,7 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 	@Override
 	public List<Veicolo> getAutoPerCategoria(Categoria categoria) {
 		List<Veicolo> veicolos = null;
-		Query query = JpaDAOFactory.getManager().createQuery("SELECT v FROM Veicolo v WHERE v.categoria = :para");
+		Query query = JpaDAOFactory.getManager().createQuery("SELECT v FROM Veicolo v WHERE v.categoria = :para AND v.visible=1");
 		query.setParameter("para", categoria);
 		try {
 			veicolos = query.getResultList();
@@ -91,8 +91,12 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 	}
 
 	@Override
-	public boolean deleteVeicolo(String targa) {
-		// TODO Auto-generated method stub
+	public boolean deleteVeicolo(Veicolo veicolo) {
+		EntityManager manager = JpaDAOFactory.getManager();
+		veicolo.setVisible((byte)0);
+		manager.getTransaction().begin();
+		manager.merge(veicolo);
+		manager.getTransaction().commit(); //TODO manage exception
 		return false;
 	}
 
