@@ -24,8 +24,6 @@ public class Action_AddVeicolo extends HttpServlet {
 		Veicolo veicolo = null;
 		boolean success = false;
 		
-		System.out.println(request.getParameter("categoria"));
-		
 		veicolo = new Veicolo(0.0,					//TODO Impostare capacità del serbatoio
 				request.getParameter("colore"), 
 				request.getParameter("marca"), 
@@ -33,8 +31,6 @@ public class Action_AddVeicolo extends HttpServlet {
 				Integer.parseInt(request.getParameter("n_Posti")), 
 				request.getParameter("targa"),
 				DaoFactory.getDaoFactory().getCategoriaDAO().findCategoria(request.getParameter("categoria"))); //TODO Verificare il corretto funzionamento della Categoria
-		
-		System.out.println("ACTIONADDVEICOLO: " + veicolo);
 		
 		if (veicolo != null) {
 			success = DaoFactory.getDaoFactory().getVeicoloDAO().addVeicolo(veicolo);
