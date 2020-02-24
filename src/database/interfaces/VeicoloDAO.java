@@ -12,7 +12,6 @@ public interface VeicoloDAO {
 	public boolean addVeicolo(Veicolo veicolo);
 	public Veicolo findVeicolo(String t);
 	public void updateVeicolo(Veicolo veicolo);
-	public boolean updateVeicolo(Veicolo veicolo, int idVeicolo, int categoria);
 	public boolean deleteVeicolo(String targa);
 	public List<Veicolo> getVeicoliDisponibili(Date inzio, Date fine, Categoria categoria);
 	public List<Veicolo> getVeicoliDisponibili(Date inzio, Categoria categoria);

@@ -1,5 +1,6 @@
 package database.JPA;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -27,6 +28,11 @@ public class JpaNoleggioDAO implements NoleggioDAO {
 			instance = new JpaNoleggioDAO();
 		}
 		return instance;
+	}
+	
+	public List<Noleggio> getNoleggi() {
+		EntityManager manager = JpaDAOFactory.getManager();
+		return manager.createNamedQuery("Noleggio.findAll").getResultList();
 	}
 
 	@Override
@@ -80,4 +86,21 @@ public class JpaNoleggioDAO implements NoleggioDAO {
 		else
 			return 0;
 	}
+
+	@Override
+	public int noleggiMese() {
+		LocalDate now = LocalDate.now();
+		int mese = now.getMonthValue();
+		List<Noleggio> noleggi = getNoleggi();
+		
+		return 0;
+	}
+
+	@Override
+	public double fatturatoMensile() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
 }

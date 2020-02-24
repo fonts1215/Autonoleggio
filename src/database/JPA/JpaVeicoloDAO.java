@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import database.JpaDAOFactory;
 import database.interfaces.VeicoloDAO;
 import model.*;
+import utils.Utils;
 
 public class JpaVeicoloDAO implements VeicoloDAO{
 	private static JpaVeicoloDAO instance = null;
@@ -57,10 +58,14 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 	public boolean addVeicolo(Veicolo veicolo) {
 		EntityManager manager = JpaDAOFactory.getManager();
 		EntityTransaction transaction = manager.getTransaction();
-		transaction.begin();
-		manager.persist(veicolo); //TODO impostare eccezione specifica
-		transaction.commit();
-		return true;
+		if(Utils.validateTarga(veicolo.getTarga())) {
+			transaction.begin();
+			manager.persist(veicolo); //TODO impostare eccezione specifica
+			transaction.commit();
+			return true;
+		}
+		else
+			return false;
 	}
 
 	@Override
@@ -74,20 +79,15 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 		return v;
 	}
 
-	@Override
-	public boolean updateVeicolo(Veicolo veicolo, int idVeicolo, int categoria) {
-		EntityManager manager = JpaDAOFactory.getManager();
-		manager.merge(null);
-		return false;	
-	}
 	
 	@Override
 	public void updateVeicolo(Veicolo veicolo) {
 		EntityManager manager = JpaDAOFactory.getManager();
-		manager.getTransaction().begin();
-		manager.merge(veicolo);
-		manager.getTransaction().commit(); //TODO manage exception 
-		//return true;	
+		if(Utils.validateTarga(veicolo.getTarga())) {
+			manager.getTransaction().begin();
+			manager.merge(veicolo);
+			manager.getTransaction().commit(); //TODO manage exception
+		}
 	}
 
 	@Override
@@ -116,8 +116,5 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 		query.setParameter(1, inzio.toString());
 		query.setParameter(2, categoria.getIdcategoria());	
 		return query.getResultList();
-	}
-	
-	
-	
+	}	
 }

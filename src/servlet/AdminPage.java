@@ -21,6 +21,7 @@ public class AdminPage extends HttpServlet {
 		session.setAttribute("dbUtenti", DaoFactory.getDaoFactory().getUtenteDAO().getUtenti());
 		session.setAttribute("dbVeicoli", DaoFactory.getDaoFactory().getVeicoloDAO().getAuto());
 		session.setAttribute("dbCategoria", DaoFactory.getDaoFactory().getCategoriaDAO().getCategorie());
+		session.setAttribute("numero_prenotazioni", ""); //TODO, gestire 
 		request.getRequestDispatcher("/WEB-INF/adminPage.jsp").forward(request, response);
 	}
 
