@@ -1,3 +1,4 @@
+<%@page import="utils.Utils"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Categoria"%>
 <%@page import="model.Utente"%>
@@ -317,9 +318,11 @@
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
-												<a  id="logout"> <i class="zmdi zmdi-power"></i>Logout</a>
+												<a id="logout"> <i class="zmdi zmdi-power"></i>Logout
+												</a>
 												<form action="Logout" method="post">
-													<button id="logoutbutton" type="submit" style="display: none" ></button>
+													<button id="logoutbutton" type="submit"
+														style="display: none"></button>
 												</form>
 											</div>
 										</div>
@@ -437,24 +440,32 @@
 												<th>Cognome</th>
 												<th>Email</th>
 												<th>Data di Nascita</th>
+												<th>Prenotazioni</th>
 											</tr>
 										</thead>
-										<tbody>
-											<%
-												for (Utente u : utenti) {
-											%>
-											<tr>
-												<td><%=u.getIdUser()%></td>
-												<td><%=u.getNameUser()%></td>
-												<td><%=u.getSurnameUser()%></td>
-												<td><%=u.getEmailUser()%></td>
-												<td><%=u.getBirthdateUser()%></td>
-											</tr>
-											<%
-												}
-											%>
+										<form action="VisualizzaNoleggiCliente" method="post">
+											<tbody>
+												<%
+													for (Utente u : utenti) {
+												%>
+												<tr class="utente_riga">
 
-										</tbody>
+													<td><%=u.getIdUser()%></td>
+													<td><%=u.getNameUser()%></td>
+													<td><%=u.getSurnameUser()%></td>
+													<td><%=u.getEmailUser()%></td>
+													<td><%=Utils.dateFormatter(u.getBirthdateUser())%></td>
+													<td>
+														<button type="submit" name="user_email"
+															value="<%=u.getEmailUser()%>">Visualizza</button>
+													</td>
+												</tr>
+												<%
+													}
+												%>
+
+											</tbody>
+										</form>
 									</table>
 								</div>
 							</div>
@@ -551,16 +562,13 @@
         	    };
         	}));
 			let asd = "button_nome_categoria" + $(this).text();
-			console.log(asd);
 			$("#"+asd).trigger("click")
 	    })
 	    
 	    $("#logout").on("click", function (e) {
 	    	console.log("clicked")
 			$("#logoutbutton").trigger("click")
-	    })
-	    
-	    
+	    })   	    
 	})
 	
 	

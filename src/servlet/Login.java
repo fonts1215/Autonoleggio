@@ -36,7 +36,6 @@ public class Login extends HttpServlet{
 		
 		Cookie[] cookies = request.getCookies();
 		for(Cookie c : cookies) {
-			System.out.println("COOKIE NAME: " + c.getName() + "VALUE: " + c.getValue());
 			if(c.getName().equals("email"))
 				emailFromCookie = c.getValue();
 			if(c.getName().equals("password"))
@@ -78,16 +77,5 @@ public class Login extends HttpServlet{
 		}			
 	} 
 	
-	@Override
-	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
-	}
-	
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		super.destroy();
-	}
 
 }	

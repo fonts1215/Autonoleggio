@@ -26,6 +26,9 @@
 				<form action="Logout" method="post">
 					<input type="submit" value="logout">
 				</form>
+				<form action="ParcoAuto" method="post">
+					<input type="submit" value="Parco auto">
+				</form>
 			</div>
 		</div>
 	</div>

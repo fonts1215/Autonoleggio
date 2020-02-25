@@ -112,6 +112,4 @@ public class Noleggio implements Serializable {
 		this.utente = utente;
 		this.veicolo = veicolo;
 	}
-	
-		
 }

@@ -101,4 +101,14 @@ public class Utils {
 			return amount;
 		}
 	}
+	
+	public static boolean isAdult(Date birth) {
+		LocalDate nascita = LocalDate.parse(Utils.dateFormatter(birth));
+		Period period = Period.between(nascita, LocalDate.now());
+		period.normalized();
+		if(period.getYears() >= 18)
+			return true;
+		else 
+			return false;
+	}
 }

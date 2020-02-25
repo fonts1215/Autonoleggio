@@ -15,16 +15,6 @@ import utils.Utils;
 
 public class JpaVeicoloDAO implements VeicoloDAO{
 	private static JpaVeicoloDAO instance = null;
-	// TABELLA VEICOLI
-	private final static String VEICOLI = "veicoli";
-	private final static String IDVEICOLO = "idVeicolo";
-	private final static String TARGA = "targa";
-	private final static String MARCA = "marca";
-	private final static String MODELLO = "modello";
-	private final static String N_POSTI = "n_Posti";
-	private final static String C_SERBATOIO = "c_Serbatoio";
-	private final static String COLORE = "colore";
-	private final static String CATEGORIA = "idCatogoriaVeicolo";
 	
 	private JpaVeicoloDAO() {
 		
@@ -37,6 +27,7 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 		return instance;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Veicolo> getAutoPerCategoria(Categoria categoria) {
 		List<Veicolo> veicolos = null;
@@ -48,12 +39,17 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 		return veicolos;		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Veicolo> getAuto() {
-		EntityManager manager = JpaDAOFactory.getManager();
-		return manager.createNamedQuery("Veicolo.findAll").getResultList();
+		List<Veicolo> veicolos = null;
+		Query query = JpaDAOFactory.getManager().createQuery("SELECT v FROM Veicolo v WHERE v.visible=1");
+		try {
+			veicolos = query.getResultList();
+		} catch (NoResultException e) {}
+		return veicolos;
 	}
-
+	
 	@Override
 	public boolean addVeicolo(Veicolo veicolo) {
 		EntityManager manager = JpaDAOFactory.getManager();
@@ -70,7 +66,7 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 
 	@Override
 	public Veicolo findVeicolo(String t) {
-		Query query = JpaDAOFactory.getManager().createQuery("SELECT v FROM Veicolo v WHERE v.targa like :para1");
+		Query query = JpaDAOFactory.getManager().createQuery("SELECT v FROM Veicolo v WHERE v.targa like :para1 AND v.visible=1");
 		query.setParameter("para1", t);
 		Veicolo v = null;
 		try {
@@ -100,18 +96,20 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Veicolo> getVeicoliDisponibili(Date inzio, Date fine, Categoria categoria) { //IL PARAMETRO DATE DEVE ESSERE DEL TIPO YYYY-MM-DD
 		System.out.println("inzio" + inzio);
 		System.out.println("fine" + fine);
 		Query query = JpaDAOFactory.getManager()
-				.createNativeQuery("SELECT * FROM veicolo WHERE idVeicolo NOT IN(SELECT idVeicolo FROM noleggio WHERE ? >= noleggio.startRental and ? <= noleggio.stopRental) AND idcategoria = ?", Veicolo.class);
+				.createNativeQuery("SELECT * FROM veicolo WHERE idVeicolo NOT IN(SELECT idVeicolo FROM noleggio WHERE ? >= noleggio.startRental and ? <= noleggio.stopRental) AND idcategoria = ? AND visible=1", Veicolo.class);
 		query.setParameter(2, inzio.toString()); 
 		query.setParameter(1, fine.toString());
 		query.setParameter(3, categoria.getIdcategoria());	
 		return query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Veicolo> getVeicoliDisponibili(Date inzio, Categoria categoria) { //IL PARAMETRO DATE DEVE ESSERE DEL TIPO YYYY-MM-DD
 		System.out.println("inzio" + inzio);

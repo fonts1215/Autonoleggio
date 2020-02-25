@@ -57,7 +57,7 @@ public class Veicolo implements Serializable {
 
 	private String targa;
 	
-	private byte visible;
+	private byte visible = (byte) 1;
 
 	//bi-directional many-to-one association to Noleggio
 	@OneToMany(mappedBy="veicolo")
