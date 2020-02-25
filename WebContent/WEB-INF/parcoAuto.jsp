@@ -1,5 +1,6 @@
 <%@page import="model.Veicolo"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.Set"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -10,7 +11,7 @@
 </head>
 <body>
 	<%
-		List<Veicolo> veicoli = (List<Veicolo>) request.getSession().getAttribute("parcoauto");
+		Set<Veicolo> veicoli = (Set<Veicolo>) request.getSession().getAttribute("parcoauto");
 	%>
 	<h1>PARCO AUTO</h1>
 		<table style=" border: 1px solid black;">

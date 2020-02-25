@@ -173,5 +173,7 @@ public class Veicolo implements Serializable {
 				+ noleggios + ", categoria=" + categoria + "]";
 	}
 	
-	
+	public String getMarcaModello() {
+		return marca + " " + modello;
+	}
 }

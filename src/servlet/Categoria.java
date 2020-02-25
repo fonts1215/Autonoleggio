@@ -27,11 +27,8 @@ public class Categoria extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String nomeCategoria = request.getParameter("categoria");
-		System.out.println("categoria clicked: " + nomeCategoria);
 		model.Categoria categoria = DaoFactory.getDaoFactory().getCategoriaDAO().findCategoria(nomeCategoria);
 		List<Veicolo> veicoli = DaoFactory.getDaoFactory().getVeicoloDAO().getAutoPerCategoria(categoria);
-		System.out.println("veicoli: " + veicoli);
-		System.out.println("categoria: " + categoria.toString());
 		request.setAttribute("veicoli", veicoli);
 		request.setAttribute("categoria", categoria);
 		request.getRequestDispatcher("WEB-INF/visualizzaVeicoli.jsp").forward(request, response);

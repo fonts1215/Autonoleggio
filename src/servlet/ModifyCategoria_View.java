@@ -19,9 +19,7 @@ public class ModifyCategoria_View extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id_categoria = Integer.parseInt(request.getParameter("id_categoria"));
-		System.out.println(id_categoria);
 		Categoria categoria = DaoFactory.getDaoFactory().getCategoriaDAO().findCategoria(id_categoria);
-		System.out.println("Categoria trovata: " + categoria);
 		request.setAttribute("categoria", categoria);
 		request.getRequestDispatcher("/WEB-INF/modify_category.jsp").forward(request, response); 
 	}

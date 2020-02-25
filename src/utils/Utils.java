@@ -27,7 +27,6 @@ public class Utils {
 	
 	public static boolean isLowerThanToday(LocalDate date) {  //if the date is equals or lower than today return true else false
 		LocalDate now = LocalDate.now();
-		System.out.println(now.compareTo(date));
 		if(now.compareTo(date) <= 0)
 			return true;
 		else 
@@ -37,7 +36,6 @@ public class Utils {
 	public static boolean isLowerThanToday(Date date) {  //if the date is equals or greater than today return true else false
 		LocalDate now = LocalDate.now();
 		LocalDate date2 = LocalDate.parse(Utils.dateFormatter(date));
-		System.out.println(now.compareTo(date2));
 		if(now.compareTo(date2) <= 0)
 			return true;
 		else 
@@ -86,7 +84,6 @@ public class Utils {
 		LocalDate fine = LocalDate.parse(Utils.dateFormatter(fineD));
 		Categoria categoria = veicolo.getCategoria();
 		double amount = 0.0;
-		System.out.println("inizio.compareTo(fine)" + inizio.compareTo(fine));
 		if(inizio.compareTo(fine) != 0) {
 			Period period = Period.between(inizio, fine);
 			period.normalized();

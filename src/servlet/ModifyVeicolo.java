@@ -27,8 +27,6 @@ public class ModifyVeicolo extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("myTest" + request.getParameter("id_veicolo"));
 		int id_veicolo = Integer.parseInt(request.getParameter("id_veicolo"));
 		int categoria = Integer.parseInt(request.getParameter("categoria"));
 

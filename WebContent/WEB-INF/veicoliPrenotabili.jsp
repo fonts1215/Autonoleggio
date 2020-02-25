@@ -1,4 +1,6 @@
+<%@page import="java.util.Map"%>
 <%@page import="java.sql.Date"%>
+<%@page import="java.util.Set"%>
 <%@page import="model.*"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -16,22 +18,22 @@
 </head>
 <body>
 	<%
-		List<Veicolo> veicoli = (List<Veicolo>) request.getAttribute("veicoli");
+		Set<Veicolo> veicoli = (Set<Veicolo>) request.getAttribute("veicoli");
 		List<Categoria> categorie = (List<Categoria>) request.getAttribute("caterogie");
 		Utente user = (Utente) request.getAttribute("utente");
 		Date dataInizio = (Date) request.getAttribute("dataInizio");
 		Date dataFine = (Date) request.getAttribute("dataFine");
-		
 	%>
 	<form action="SearchVeicolo" method="post">
-	<input type="hidden" name="email_utente" value="<%= user.getEmailUser()%>">
+		<input type="hidden" name="email_utente"
+			value="<%=user.getEmailUser()%>">
 		<div class="row col-12">
 			<div class="col">
 				<div class="row">
 					<div class="col">
 						<div class="form-group">
-							<label>Data Inizio</label><input type="date"
-								class="form-control" name="dataInizio" value="<%= dataInizio%>">
+							<label>Data Inizio</label><input type="date" class="form-control"
+								name="dataInizio" value="<%=dataInizio%>">
 						</div>
 					</div>
 				</div>
@@ -43,7 +45,7 @@
 					<div class="col">
 						<div class="form-group">
 							<label>Data Fine</label><input type="date" class="form-control"
-								name="dataFine" value="<%= dataFine%>">
+								name="dataFine" value="<%=dataFine%>">
 						</div>
 					</div>
 				</div>
@@ -75,15 +77,22 @@
 		<form action="Prenota" method="post">
 			<div class="card-header"></div>
 			<div class="ca rd-body">
-				<h5 class="card-title"><%=v.getMarca() + " " + v.getModello() %></h5>
-				<p class="card-text"> Tariffa Giornaliera: <%=v.getCategoria().getTGiornaliera()%></p>
-				<p class="card-text"> Tariffa Settimanale: <%=v.getCategoria().getTSettimanale()%></p>
-				<p class="card-text"> Tariffa Mensile: <%=v.getCategoria().getTMensile()%></p>
+				<h5 class="card-title"><%=v.getMarca() + " " + v.getModello()%></h5>
+				<p class="card-text">
+					Tariffa Giornaliera:
+					<%=v.getCategoria().getTGiornaliera()%></p>
+				<p class="card-text">
+					Tariffa Settimanale:
+					<%=v.getCategoria().getTSettimanale()%></p>
+				<p class="card-text">
+					Tariffa Mensile:
+					<%=v.getCategoria().getTMensile()%></p>
 				<input type="submit" class="btn btn-primary" value="Prenota">
 				<input type="hidden" name="dataInizio" value="<%=dataInizio%>">
 				<input type="hidden" name="dataFine" value="<%=dataFine%>">
-				<input type="hidden" name="email_utente" value="<%=user.getEmailUser()%>">
-				<input type="hidden" name="targa_veicolo" value="<%=v.getTarga()%>">
+				<input type="hidden" name="email_utente"
+					value="<%=user.getEmailUser()%>"> <input type="hidden"
+					name="targa_veicolo" value="<%=v.getTarga()%>">
 			</div>
 		</form>
 	</div>

@@ -99,8 +99,6 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Veicolo> getVeicoliDisponibili(Date inzio, Date fine, Categoria categoria) { //IL PARAMETRO DATE DEVE ESSERE DEL TIPO YYYY-MM-DD
-		System.out.println("inzio" + inzio);
-		System.out.println("fine" + fine);
 		Query query = JpaDAOFactory.getManager()
 				.createNativeQuery("SELECT * FROM veicolo WHERE idVeicolo NOT IN(SELECT idVeicolo FROM noleggio WHERE ? >= noleggio.startRental and ? <= noleggio.stopRental) AND idcategoria = ? AND visible=1", Veicolo.class);
 		query.setParameter(2, inzio.toString()); 
@@ -112,7 +110,6 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Veicolo> getVeicoliDisponibili(Date inzio, Categoria categoria) { //IL PARAMETRO DATE DEVE ESSERE DEL TIPO YYYY-MM-DD
-		System.out.println("inzio" + inzio);
 		Query query = JpaDAOFactory.getManager()
 				.createNativeQuery("SELECT * FROM veicolo WHERE idVeicolo NOT IN(SELECT idVeicolo FROM noleggio WHERE ? <= noleggio.stopRental) AND idcategoria = ?", Veicolo.class);
 		query.setParameter(1, inzio.toString());

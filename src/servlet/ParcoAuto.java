@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,15 @@ public class ParcoAuto extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		List<Veicolo> veicoli = DaoFactory.getDaoFactory().getVeicoloDAO().getAuto(); 
+		List<Veicolo> veicoli = DaoFactory.getDaoFactory().getVeicoloDAO().getAuto();
+		Set<Veicolo> veicoliSet = new TreeSet<>((Veicolo o1, Veicolo o2) -> {
+			int risultato = o1.getMarca().compareTo(o2.getMarca());
+			if (risultato == 0) {
+				risultato = o1.getModello().compareTo(o2.getModello());
+			}
+			return risultato;
+		});
+		veicoliSet.addAll(veicoli);
 		if(session.getAttribute("parcoauto") == null)
 			session.setAttribute("parcoauto", veicoli);
 		request.getRequestDispatcher("/WEB-INF/parcoAuto.jsp").forward(request, response);
