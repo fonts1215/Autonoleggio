@@ -3,9 +3,12 @@ package utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 import java.util.logging.SimpleFormatter;
 import java.util.regex.Pattern;
+
+import model.*;
 
 public class Utils {
 	public static String dateFormatter(Date date) {
@@ -71,11 +74,31 @@ public class Utils {
 				}
 			}else {
 				return false;
-
 			}
 		}
 		else {
 			return false;
+		}
+	} 
+	
+	public static double calcolaAmount(Veicolo veicolo, Date inizioD, Date fineD) {
+		LocalDate inizio = LocalDate.parse(Utils.dateFormatter(inizioD));
+		LocalDate fine = LocalDate.parse(Utils.dateFormatter(fineD));
+		Categoria categoria = veicolo.getCategoria();
+		double amount = 0.0;
+		System.out.println("inizio.compareTo(fine)" + inizio.compareTo(fine));
+		if(inizio.compareTo(fine) != 0) {
+			Period period = Period.between(inizio, fine);
+			period.normalized();
+			amount = ((period.getDays()+1) %7)*categoria.getTGiornaliera() + 
+					(period.getDays()/7)*categoria.getTSettimanale() + 
+					period.getMonths()*categoria.getTMensile() + 
+					period.getYears()*(categoria.getTMensile()*12); 
+	
+			return amount;
+		}else {
+			amount = categoria.getTGiornaliera();
+			return amount;
 		}
 	}
 }

@@ -91,7 +91,6 @@ public class JpaNoleggioDAO implements NoleggioDAO {
 		LocalDate now = LocalDate.now();
 		int mese = now.getMonthValue();
 		List<Noleggio> noleggi = getNoleggi();
-		
 		return 0;
 	}
 

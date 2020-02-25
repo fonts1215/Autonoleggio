@@ -31,7 +31,7 @@ public class Prenota extends HttpServlet {
 		//Date dataFine = Date.valueOf(request.getParameter("dataFine"));
 		Veicolo veicolo = JpaDAOFactory.getDaoFactory().getVeicoloDAO().findVeicolo(targa_veicolo);
 		Utente utente = JpaDAOFactory.getDaoFactory().getUtenteDAO().findUser(email_utente);
-		Noleggio noleggio = new Noleggio((dataFine.compareTo(dataInizio))*veicolo.getCategoria().getTGiornaliera() , dataInizio, dataFine, utente, veicolo); //TODO gestire la scelta giornaliera-mensile-settimanale
+		Noleggio noleggio = new Noleggio(Utils.calcolaAmount(veicolo, dataInizio, dataFine), dataInizio, dataFine, utente, veicolo); 
 		try{
 			JpaDAOFactory.getDaoFactory().getNoleggioDAO().inserisciNoleggio(noleggio);
 			request.setAttribute("risultato", "prenotazioneEffettuata");
