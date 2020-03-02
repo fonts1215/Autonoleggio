@@ -1,18 +1,10 @@
 package utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
-
-import model.Categoria;
-import model.Veicolo;
+import database.DaoFactory;
 
 public class Test {
 	public static void main(String[] args) {
-		List<Veicolo> veicoli = new ArrayList<Veicolo>();
+		/*List<Veicolo> veicoli = new ArrayList<Veicolo>();
 		Categoria categoria = new Categoria("asd", "asd", 0, 0, 0);
 		veicoli.add(new Veicolo(0.0, "Grigio", "Fiat", "500", 4, "A", categoria));
 		veicoli.add(new Veicolo(0.0, "Grigio", "Fiat", "500", 4, "B", categoria));
@@ -32,11 +24,12 @@ public class Test {
 		
 		veicoliSet.addAll(veicoli);
 		
-		/*Map<String, List<Veicolo>> veicoliDivisi = veicoliSet.stream()
-				.collect(Collectors.groupingBy(Veicolo::getMarcaModello, Collectors.toList()));*/
+		Map<String, List<Veicolo>> veicoliDivisi = veicoliSet.stream()
+				.collect(Collectors.groupingBy(Veicolo::getMarcaModello, Collectors.toList()));
 		for(Veicolo v : veicoliSet) {
 			System.out.println(v.getModello());
-		}
+		}*/
 		
+		Utils.bestCategoria();
 	}
 }

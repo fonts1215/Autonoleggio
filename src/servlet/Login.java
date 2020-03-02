@@ -2,6 +2,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.TreeMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -11,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import database.DaoFactory;
-import model.Utente;
+import model.*;
 
 @WebServlet("/login")
 public class Login extends HttpServlet{  	
@@ -76,6 +79,5 @@ public class Login extends HttpServlet{
 			response.sendRedirect("/Autonoleggio/login.jsp?errore=UtenteNonTrovato");
 		}			
 	} 
-	
 
-}	
+}
