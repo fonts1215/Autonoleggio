@@ -14,15 +14,13 @@ import javax.servlet.http.HttpSession;
 
 import database.DaoFactory;
 import model.Veicolo;
-
 /**
  * Servlet implementation class ParcoAuto
  */
 @WebServlet("/ParcoAuto")
 public class ParcoAuto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		List<Veicolo> veicoli = DaoFactory.getDaoFactory().getVeicoloDAO().getAuto();
 		Set<Veicolo> veicoliSet = new TreeSet<>((Veicolo o1, Veicolo o2) -> {
@@ -33,9 +31,12 @@ public class ParcoAuto extends HttpServlet {
 			return risultato;
 		});
 		veicoliSet.addAll(veicoli);
-		if(session.getAttribute("parcoauto") == null)
-			session.setAttribute("parcoauto", veicoli);
-		request.getRequestDispatcher("/WEB-INF/parcoAuto.jsp").forward(request, response);
+		
+		session.setAttribute("parcoauto", veicoliSet);
+		response.sendRedirect("utente/parcoauto");
 	}
-
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
 }

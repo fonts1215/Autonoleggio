@@ -23,10 +23,10 @@
 				<h1>CLIENT PAGE</h1>
 			</div>
 			<div class="col-3">
-				<form action="Logout" method="post">
+				<form action="/Autonoleggio/utente/logout" method="post">
 					<input type="submit" value="logout">
 				</form>
-				<form action="ParcoAuto" method="post">
+				<form action="/Autonoleggio/ParcoAuto" method="get">
 					<input type="submit" value="Parco auto">
 				</form>
 			</div>
@@ -53,9 +53,7 @@
 			}
 		%>
 	</p>
-	<form action="SearchVeicolo" method="post">
-		<input type="hidden" name="email_utente"
-			value="<%=user.getEmailUser()%>">
+	<form action="/Autonoleggio/SearchVeicolo" method="post">
 		<div class="row col-12">
 			<div class="col">
 				<div class="row">
@@ -97,14 +95,12 @@
 					<button type="submit" class="btn btn-primary">Cerca</button>
 				</div>
 			</div>
-			
-			
 	</form>
 	
 	<h1>Le tue prenotazioni</h1>
 			
 			<% if (noleggi != null) { for(Noleggio n : noleggi) { %>
-			<form method="post" action="DeletePrenotazione">
+			<form action="/Autonoleggio/DeletePrenotazione" method="post">
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title"><%= n.getVeicolo().getMarca() + " " + n.getVeicolo().getModello() %></h5>
@@ -147,6 +143,4 @@
 		});
 	});
 </script>
-
-
 </html>

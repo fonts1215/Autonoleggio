@@ -27,6 +27,8 @@ public class Logout extends HttpServlet {
 			response.addCookie(cookie2);
 		}
 		session.invalidate();
-		new Login().doGet(request, response);
+		System.out.println("logout");
+		response.sendRedirect("login.jsp?errore=logout");
 	}
 }
+ 

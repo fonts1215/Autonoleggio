@@ -18,15 +18,14 @@
 </head>
 <body>
 	<%
-		Set<Veicolo> veicoli = (Set<Veicolo>) request.getAttribute("veicoli");
-		List<Categoria> categorie = (List<Categoria>) request.getAttribute("caterogie");
-		Utente user = (Utente) request.getAttribute("utente");
-		Date dataInizio = (Date) request.getAttribute("dataInizio");
-		Date dataFine = (Date) request.getAttribute("dataFine");
+		HttpSession sessione = request.getSession();
+		Set<Veicolo> veicoli = (Set<Veicolo>) sessione.getAttribute("veicoliDisponibili");
+		List<Categoria> categorie = (List<Categoria>) sessione.getAttribute("categoria");
+		Utente user = (Utente) sessione.getAttribute("utente");
+		Date dataInizio = (Date) sessione.getAttribute("dataInizio");
+		Date dataFine = (Date) sessione.getAttribute("dataFine");
 	%>
-	<form action="SearchVeicolo" method="post">
-		<input type="hidden" name="email_utente"
-			value="<%=user.getEmailUser()%>">
+	<form action="/Autonoleggio/SearchVeicolo" method="post">
 		<div class="row col-12">
 			<div class="col">
 				<div class="row">
@@ -74,7 +73,7 @@
 		for (Veicolo v : veicoli) {
 	%>
 	<div class="card">
-		<form action="Prenota" method="post">
+		<form action="/Autonoleggio/utente/prenota" method="post">
 			<div class="card-header"></div>
 			<div class="ca rd-body">
 				<h5 class="card-title"><%=v.getMarca() + " " + v.getModello()%></h5>
@@ -88,11 +87,7 @@
 					Tariffa Mensile:
 					<%=v.getCategoria().getTMensile()%></p>
 				<input type="submit" class="btn btn-primary" value="Prenota">
-				<input type="hidden" name="dataInizio" value="<%=dataInizio%>">
-				<input type="hidden" name="dataFine" value="<%=dataFine%>">
-				<input type="hidden" name="email_utente"
-					value="<%=user.getEmailUser()%>"> <input type="hidden"
-					name="targa_veicolo" value="<%=v.getTarga()%>">
+				<input type="hidden" name="targa_veicolo" value="<%=v.getTarga()%>">
 			</div>
 		</form>
 	</div>

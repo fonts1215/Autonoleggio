@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import database.DaoFactory;
 import database.JpaDAOFactory;
@@ -23,6 +24,7 @@ public class SearchVeicolo extends HttpServlet {
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		Date dataInizio = null;
 		Date dataFine = null;
 		try{
@@ -47,16 +49,14 @@ public class SearchVeicolo extends HttpServlet {
 				});
 				veicoliSet.addAll(veicolos);
 				
-				request.setAttribute("utente", JpaDAOFactory.getDaoFactory().getUtenteDAO().findUser(request.getParameter("email_utente")));
-				request.setAttribute("veicoli", veicoliSet);
-				request.setAttribute("dataInizio", dataInizio);
-				request.setAttribute("dataFine", dataFine);
-				request.setAttribute("caterogie", JpaDAOFactory.getDaoFactory().getCategoriaDAO().getCategorie());
-				request.getRequestDispatcher("/WEB-INF/veicoliPrenotabili.jsp").forward(request, response);
-			}	
+				session.setAttribute("veicoliDisponibili", veicoliSet);
+				session.setAttribute("dataInizio", dataInizio);
+				session.setAttribute("dataFine", dataFine);
+				response.sendRedirect("utente/searchveicolo");
+			}
 		}
 		else {
-			request.getRequestDispatcher("/ClientPage").forward(request, response);
+			response.sendRedirect("utente/home");
 		}
 		
 		
